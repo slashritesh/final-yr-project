@@ -18,7 +18,7 @@ const RightSidebar = async () => {
       </div>
       <div className="my-5">
         <h3>Follow Users</h3>
-        <div className="my-3">
+        <div className="my-3 space-y-3">
           {users?.map((item, index) => {
             return (
               <Link
