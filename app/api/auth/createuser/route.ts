@@ -18,7 +18,7 @@ export async function GET() {
   // Check if user already exists in the database
   const dbuser = await prisma.user.findUnique({
     where: {
-      id: user.id, // Assuming `id` is the Kinde user ID
+      kindeId: user.id, // Assuming `id` is the Kinde user ID
     },
   });
 

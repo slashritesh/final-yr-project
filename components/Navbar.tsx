@@ -10,6 +10,7 @@ import {
   useKindeBrowserClient,
 } from "@kinde-oss/kinde-auth-nextjs";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 const Navbar = () => {
   const { user, isAuthenticated } = useKindeBrowserClient();
@@ -22,8 +23,18 @@ const Navbar = () => {
           {isAuthenticated ? (
             <div className="flex items-center gap-5">
               <div className="space-x-5">
-                <Link className={buttonVariants({variant:'ghost'})} href={''}>My Projects</Link>
-                <Link className={buttonVariants({variant:'default'})} href={''}>New Project</Link>
+                <Link
+                  className={cn(buttonVariants({ variant: "ghost" }))}
+                  href={"/projects"}
+                >
+                  My Projects
+                </Link>
+                <Link
+                  className={cn(buttonVariants({ variant: "default" }))}
+                  href={"/projects/create"}
+                >
+                  New Project
+                </Link>
               </div>
               <div className="flex items-center gap-2">
                 <Avatar>
@@ -36,7 +47,7 @@ const Navbar = () => {
                   </AvatarFallback>
                 </Avatar>
               </div>
-              
+
               <LogoutLink>
                 <Button variant="outline">Logout</Button>
               </LogoutLink>

@@ -19,7 +19,7 @@ export default function PublicLayout({
     </div>
 
     {/* Main Content Area (Posts, Project Ideas, Discussions) */}
-    <div className="flex-1 mx-5"> {/* Main content takes remaining space */}
+    <div className="flex-1 mx-10"> {/* Main content takes remaining space */}
       {children} {/* This will render the main content (e.g., list of posts or project ideas) */}
     </div>
 

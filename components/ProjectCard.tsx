@@ -7,8 +7,10 @@ import {
   ThumbsUp,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface ProjectCardProps {
+  id : string,
   thumbnailUrl: string;
   title: string;
   authorName: string;
@@ -21,6 +23,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({
   thumbnailUrl,
+  id,
   tags,
   title,
   description,
@@ -30,11 +33,11 @@ export default function ProjectCard({
   views,
 }: ProjectCardProps) {
   return (
-    <div className="border rounded-xl p-4 shadow-sm hover:shadow-md transition">
+    <Link href={`/${id}`} className="border rounded-xl p-4 shadow-sm hover:shadow-md transition">
       <div className="flex gap-4">
         {/* Thumbnail */}
         <div className="w-full max-w-[300px] h-[200px] bg-amber-600 relative rounded-lg overflow-hidden">
-          {/* <Image src={thumbnailUrl} alt={title} fill className="object-cover" /> */}
+          <Image src={thumbnailUrl} alt={title} fill className="object-cover" />
         </div>
 
         {/* Info */}
@@ -59,7 +62,7 @@ export default function ProjectCard({
 
           {/* Footer */}
           <div className="flex justify-between items-center mt-4">
-            <p className="text-base text-gray-500">by {authorName}</p>
+            <p className="text-base capitalize text-gray-500">by {authorName}</p>
             <div className="flex gap-4 text-gray-600 text-sm">
               <div className="flex items-center gap-1">
                 <Eye size={16} /> {views}
@@ -74,6 +77,6 @@ export default function ProjectCard({
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

@@ -39,8 +39,11 @@ model Project {
   id                        String   @id @default(auto()) @map("_id") @db.ObjectId
   title                     String
   description               String
+  thumbnail                 String
   techStack                 String[]
   tags                      String[]
+  likes                     Int?
+  views                     Int?
   isLookingForCollaborators Boolean  @default(false)
   category                  String
 
