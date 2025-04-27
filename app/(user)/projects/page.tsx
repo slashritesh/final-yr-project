@@ -16,7 +16,7 @@ const page = async () => {
               id={item.id}
               views={item.views}
               tags={item.tags}
-              likes={item.likes}
+              total_likes={item.total_likes ?? 0}
               description={item.description}
               comments={item.views}
               title={item.title}

@@ -36,6 +36,7 @@ export const getMyProjects = async () => {
       },
       select: {
         id: true,
+        total_likes : true,
         thumbnail: true,
         title: true,
         description: true,
@@ -54,6 +55,7 @@ export const getMyProjects = async () => {
 
     const finalRsponse = projects.map((project) => ({
       id: project.id,
+      total_likes : project.total_likes,
       thumbnailUrl: project.thumbnail,
       title: project.title,
       authorName: project.author.firstname + " " + project.author.lastname,
