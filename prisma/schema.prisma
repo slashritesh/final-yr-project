@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+// USER MODEL
+model User {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  kindeId           String  @unique // <- store kinde user ID here
+  profileimg        String?
+  email             String  @unique
+  firstname         String?
+  lastname          String?
+  image             String?
+  college           String?
+  bio               String?
+  isProfileComplete Boolean
+
+  posts    Project[] @relation("UserProjects")
+  comments Comment[] @relation("UserComments")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// PROJECT MODEL
+model Project {
+  id                        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title                     String
+  description               String
+  techStack                 String[]
+  tags                      String[]
+  isLookingForCollaborators Boolean  @default(false)
+  category                  String
+
+  authorId String @db.ObjectId
+  author   User   @relation(fields: [authorId], references: [id], name: "UserProjects")
+
+  comments Comment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// COMMENT MODEL
+model Comment {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  content String
+
+  projectId String  @db.ObjectId
+  project   Project @relation(fields: [projectId], references: [id])
+
+  authorId String @db.ObjectId
+  author   User   @relation(fields: [authorId], references: [id], name: "UserComments")
+
+  createdAt DateTime @default(now())
+}
