@@ -15,7 +15,7 @@ interface ProjectCardProps {
   title: string;
   authorName: string;
   description: string;
-  likes: number;
+  total_likes: number;
   comments: number;
   views: number;
   tags : string[]
@@ -28,7 +28,7 @@ export default function ProjectCard({
   title,
   description,
   authorName,
-  likes,
+  total_likes,
   comments,
   views,
 }: ProjectCardProps) {
@@ -71,7 +71,7 @@ export default function ProjectCard({
                 <MessageSquareDot size={16} /> {comments}
               </div>
               <div className="flex items-center gap-1">
-                <ThumbsUp size={16} /> {likes}
+                <ThumbsUp size={16} /> {total_likes ?? 0}
               </div>
             </div>
           </div>

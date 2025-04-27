@@ -204,6 +204,7 @@ export const getAllProjects = async () => {
         title: true,
         description: true,
         tags: true,
+        total_likes : true,
         author: {
           select: {
             firstname: true,
@@ -222,7 +223,7 @@ export const getAllProjects = async () => {
       title: project.title,
       authorName: project.author.firstname + " " + project.author.lastname,
       description: project.description,
-      likes: project.likes ?? 0,
+      total_likes: project.total_likes ?? 0,
       comments: project.comments.length,
       views: project.views ?? 0,
       tags: project.tags,
@@ -251,10 +252,25 @@ export const getSingleProject = async (projectId: string) => {
       where: {
         id: projectId,
       },
-      include : {
-        author : true,
-        comments : true
-      }
+      select: {
+        id: true,
+        thumbnail: true,
+        createdAt: true,
+        updatedAt: true,
+        title: true,
+        description: true,
+        tags: true,
+        author: {
+          select: {
+            id: true,
+            lastname: true,
+            firstname: true,
+            profileimg: true,
+          },
+        },
+        views: true,
+        total_likes: true,
+      },
     });
 
     return project;

@@ -24,18 +24,34 @@ export function formatRelativeDate(dateString: string): string {
   }
 
   const diffInMs = now.getTime() - date.getTime();
+  
+  // Handle future dates
+  if (diffInMs < 0) {
+    return 'Scheduled update';
+  }
 
   // Calculate the difference in time units
   const diffInSeconds = Math.floor(diffInMs / 1000);
   const diffInMinutes = Math.floor(diffInSeconds / 60);
   const diffInHours = Math.floor(diffInMinutes / 60);
   const diffInDays = Math.floor(diffInHours / 24);
-  const diffInMonths = Math.floor(diffInDays / 30);  // Approximate
+
+  // More accurate month calculation
+  let diffInMonths = 0;
+  const monthDiff = now.getMonth() - date.getMonth();
+  const yearDiff = now.getFullYear() - date.getFullYear();
+  
+  diffInMonths = yearDiff * 12 + monthDiff;
+  
+  // Adjust for day of month
+  if (now.getDate() < date.getDate()) {
+    diffInMonths--;
+  }
+  
   const diffInYears = Math.floor(diffInMonths / 12);
 
   const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
 
-  // Check for seconds, minutes, hours, days, months, and years
   if (diffInSeconds < 60) {
     return `last updated ${rtf.format(-diffInSeconds, 'second')}`;
   } else if (diffInMinutes < 60) {
