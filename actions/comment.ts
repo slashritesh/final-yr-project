@@ -81,7 +81,7 @@ export async function getCommentsOnProject(id: string) {
     });
     
 
-    revalidatePath(`/project/${id}`);
+    revalidatePath(`/${id}`);
 
     return comments.map((item) => {
       return {
