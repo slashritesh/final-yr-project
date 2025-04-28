@@ -22,15 +22,20 @@ export const suggestUsers = async () => {
 
 export const getUserProfile = async (id: string) => {
   try {
-    const dbuser = prisma.user.findUnique({
-      where: { id },
+    const dbuser = await prisma.user.findFirst({
+      where: { id : id },
       include: {
         posts: true,
       },
     });
+
+    console.log(dbuser);
+    
 
     return dbuser;
   } catch (error) {
     console.log(error);
   }
 };
+
+
