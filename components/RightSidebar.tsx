@@ -22,7 +22,7 @@ const RightSidebar = async () => {
           {users?.map((item, index) => {
             return (
               <Link
-                href=""
+                href={`/profile/${item.id}`}
                 key={index}
                 className="p-2 px-5 rounded-lg border hover:bg-orange-950/30 flex items-center gap-3"
               >

@@ -36,7 +36,7 @@ export default function ProjectCard({
     <Link href={`/${id}`} className="border rounded-xl p-4 shadow-sm hover:shadow-md transition">
       <div className="flex gap-4">
         {/* Thumbnail */}
-        <div className="w-full max-w-[300px] h-[200px] bg-amber-600 relative rounded-lg overflow-hidden">
+        <div className="w-full min-w-[300px] h-[200px] bg-amber-600 relative rounded-lg overflow-hidden">
           <Image src={thumbnailUrl} alt={title} fill className="object-cover" />
         </div>
 

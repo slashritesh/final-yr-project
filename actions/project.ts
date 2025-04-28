@@ -3,6 +3,7 @@
 import { projectFormSchema } from "@/components/CreateProjectForm";
 import { prisma } from "@/lib/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { revalidatePath } from "next/cache";
 import { date, z } from "zod";
 
 export const getMyProjects = async () => {
@@ -65,6 +66,8 @@ export const getMyProjects = async () => {
       views: project.views ?? 0,
       tags: project.tags,
     }));
+
+    
 
     return {
       data: finalRsponse,
@@ -182,6 +185,8 @@ export const createProject = async (
         authorId: dbuser.id,
       },
     });
+
+    revalidatePath("/")
 
     return {
       status: "success",
